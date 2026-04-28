@@ -3,109 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arthur Pereira | Portfólio</title>
+    <title>Arthur Pereira | Portfólio High-End</title>
     
-    <!-- Bibliotecas -->
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary: #38bdf8;
-            --primary-glow: rgba(56, 189, 248, 0.4);
-            --bg-dark: #030712; /* Mais escuro para destacar o brilho */
-            --card-bg: rgba(17, 24, 39, 0.7);
-            --text-slate: #94a3b8;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --primary-glow: rgba(56, 189, 248, 0.35);
+            --bg-dark: #030712;
+            --card-bg: rgba(17, 24, 39, 0.6);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
         }
 
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
             background-color: var(--bg-dark);
-            color: #f8fafc;
+            color: var(--text-main);
             overflow-x: hidden;
-            cursor: default;
+            line-height: 1.6;
         }
 
-        /* --- Efeito de Mouse Glow --- */
-        #mouse-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: -1;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-            filter: blur(80px);
-            opacity: 0.5;
-        }
-
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
-        /* --- Floating Icons Refinados --- */
-        .floating-container {
+        /* --- BACKGROUND EFFECTS --- */
+        #spotlight {
             position: fixed;
             inset: 0;
+            z-index: -1;
+            background: radial-gradient(600px circle at var(--x) var(--y), var(--primary-glow), transparent 80%);
             pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
         }
 
-        .icon-float {
-            position: absolute;
-            color: var(--primary);
-            opacity: 0.1;
-            font-size: 1.5rem;
-            filter: blur(1px);
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -2;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
         }
 
-        /* --- Header Premium --- */
+        /* --- HEADER --- */
         header {
             position: fixed;
             top: 0; width: 100%;
-            padding: 1.5rem 10%;
+            padding: 1.2rem 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(3, 7, 18, 0.8);
-            backdrop-filter: blur(12px);
+            background: rgba(3, 7, 18, 0.7);
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-color);
         }
 
         .logo-container { display: flex; align-items: center; gap: 12px; }
         .profile-img {
-            width: 45px; height: 45px;
-            border-radius: 12px; /* Quadrado arredondado estilo App */
-            border: 2px solid var(--primary);
+            width: 42px; height: 42px;
+            border-radius: 10px;
+            border: 1.5px solid var(--primary);
             object-fit: cover;
+            transition: 0.5s;
         }
-        .logo { font-size: 1.2rem; font-weight: 700; letter-spacing: -0.5px; }
+        .logo-text { font-weight: 800; font-size: 1.1rem; letter-spacing: -0.5px; }
 
-        nav ul { display: flex; gap: 30px; list-style: none; }
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-slate);
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: 0.3s;
-            text-transform: uppercase;
+        nav ul { display: flex; gap: 25px; list-style: none; }
+        nav ul a {
+            text-decoration: none; color: var(--text-dim);
+            font-size: 0.85rem; font-weight: 500; transition: 0.3s;
         }
-        nav ul li a:hover { color: var(--primary); }
+        nav ul a:hover { color: var(--primary); }
 
-        /* --- Hero Section (Efeito do Vídeo) --- */
+        /* --- HERO --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -116,228 +95,318 @@
             padding: 0 10%;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            line-height: 1;
+        .hero-badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 100px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.2);
             margin-bottom: 20px;
-            font-weight: 900;
-            background: linear-gradient(180deg, #fff 0%, #64748b 100%);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 12vw, 6.5rem);
+            font-weight: 800;
+            line-height: 0.9;
+            background: linear-gradient(to bottom, #fff 40%, #475569);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
         }
 
-        .hero p {
+        #typing-effect {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-dim);
             font-size: 1.2rem;
-            color: var(--primary);
-            font-family: 'Courier New', monospace;
-            background: rgba(56, 189, 248, 0.1);
-            padding: 5px 15px;
-            border-radius: 20px;
         }
 
-        /* --- Cards 3D & Glow (Efeito do Vídeo) --- */
+        /* --- SECTION GENÉRICA --- */
+        section { padding: 100px 10%; }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .section-title span { color: var(--primary); }
+        .section-title::after {
+            content: ""; height: 1px; flex: 1; background: var(--border-color);
+        }
+
+        /* --- BENTO GRID & CARDS --- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
-            perspective: 1000px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            padding: 30px;
             border-radius: 24px;
+            padding: 30px;
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s ease-out, border-color 0.3s, box-shadow 0.3s;
-            transform-style: preserve-3d;
+            transition: 0.3s ease;
+            cursor: pointer;
         }
 
-        /* Borda animada ao passar o mouse */
-        .card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.15);
-        }
-
+        /* O brilho interno do card (Efeito do Vídeo) */
         .card::before {
             content: "";
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(56, 189, 248, 0.1), transparent 40%);
-            z-index: 0;
-            pointer-events: none;
+            inset: 0;
+            background: radial-gradient(400px circle at var(--mx) var(--my), rgba(56, 189, 248, 0.12), transparent 80%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-5px);
         }
 
-        .card * { position: relative; z-index: 1; }
+        .card-icon {
+            width: 50px; height: 50px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); margin-bottom: 20px;
+        }
 
         .img-projeto {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            filter: grayscale(0.5);
-            transition: 0.5s;
+            width: 100%; height: 200px;
+            object-fit: cover; border-radius: 15px;
+            margin-bottom: 20px; border: 1px solid var(--border-color);
         }
-        .card:hover .img-projeto { filter: grayscale(0); transform: scale(1.02); }
 
+        .tag-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
         .tag {
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--primary);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            margin-right: 5px;
+            font-size: 0.7rem; font-weight: 600;
+            padding: 4px 12px; border-radius: 100px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
         }
 
-        /* --- Seções --- */
-        section { padding: 120px 10%; }
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            font-weight: 800;
+        /* --- VIDEO SPECIFIC --- */
+        .video-wrapper {
+            position: relative; border-radius: 15px; overflow: hidden;
+            aspect-ratio: 16/9; background: #000;
         }
+        .video-wrapper.vertical { aspect-ratio: 9/16; max-width: 280px; margin: 0 auto; }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* --- Mobile --- */
+        /* --- MENU MOBILE --- */
+        .mobile-btn { display: none; color: white; font-size: 1.5rem; }
+
         @media (max-width: 768px) {
             header { padding: 1rem 5%; }
             nav { display: none; }
+            .mobile-btn { display: block; }
             .hero h1 { font-size: 3.5rem; }
+            section { padding: 80px 5%; }
+        }
+
+        footer {
+            padding: 50px; text-align: center;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-dim); font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <div id="mouse-glow"></div>
-
-    <div class="floating-container" id="icon-bg">
-        <!-- Ícones gerados via JS para serem aleatórios -->
-    </div>
+    <div class="grid-overlay"></div>
+    <div id="spotlight"></div>
 
     <header>
         <div class="logo-container">
             <img src="https://lh3.googleusercontent.com/u/0/d/1546zJQzZ4PrstzjYGrPXEFKrDL5xMIsG" alt="Arthur" class="profile-img">
-            <div class="logo">ARTHUR.PS</div>
+            <span class="logo-text">ARTHUR<span style="color:var(--primary)">.</span>PS</span>
         </div>
         <nav>
             <ul>
-                <li><a href="#experiencias">Bio</a></li>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#experiencias">Carreira</a></li>
                 <li><a href="#projetos">Projetos</a></li>
                 <li><a href="#video">Edição</a></li>
                 <li><a href="#voluntariado">Social</a></li>
             </ul>
         </nav>
+        <div class="mobile-btn"><i class="fas fa-bars"></i></div>
     </header>
 
     <section class="hero" id="home">
-        <div data-aos="zoom-out" data-aos-duration="1500">
-            <p>Engenharia & Design</p>
-            <h1>Arthur Pereira</h1>
-            <div style="min-height: 30px;">
-                <span id="typing-effect" style="color: var(--text-slate); font-size: 1.1rem;"></span>
-            </div>
+        <div class="hero-badge" data-aos="fade-down">Disponível para novos projetos</div>
+        <h1 data-aos="zoom-out-up" data-aos-delay="200">Engenharia<br>& Media Design</h1>
+        <div data-aos="fade-up" data-aos-delay="400">
+            <span id="typing-effect"></span>
         </div>
     </section>
 
     <!-- Experiências -->
     <section id="experiencias">
-        <h2 data-aos="fade-up">Carreira</h2>
+        <h2 class="section-title" data-aos="fade-right"><span>01.</span> Experiências</h2>
         <div class="grid">
-            <div class="card" data-aos="fade-up">
-                <i class="fas fa-microchip fa-2x" style="color:var(--primary); margin-bottom:20px"></i>
-                <h3>Sistemas Embarcados</h3>
-                <p style="color: var(--text-slate); margin-top: 10px;">Desenvolvimento de firmware e integração de hardware de baixa latência.</p>
+            <div class="card" data-aos="fade-up" data-tilt>
+                <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                <h3>Aprendiz Administrativo</h3>
+                <p style="color:var(--primary); font-size: 0.9rem; font-weight: 600;">SISTEMA FIBRA | 2022</p>
+                <p style="color:var(--text-dim); margin-top: 10px;">Gestão de licitações e processos complexos utilizando ProTheus e Excel avançado.</p>
+                <div class="tag-container">
+                    <span class="tag">ERP Protheus</span> <span class="tag">Compliance</span>
+                </div>
             </div>
-            <div class="card" data-aos="fade-up" data-aos-delay="100">
-                <i class="fas fa-video fa-2x" style="color:var(--primary); margin-bottom:20px"></i>
-                <h3>Vídeo Creator</h3>
-                <p style="color: var(--text-slate); margin-top: 10px;">Storytelling visual e edição dinâmica para redes de alto engajamento.</p>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="100" data-tilt>
+                <div class="card-icon"><i class="fas fa-compass"></i></div>
+                <h3>Liderança Pioneira</h3>
+                <p style="color:var(--primary); font-size: 0.9rem; font-weight: 600;">ESCOTISMO | 2018 - ATUAL</p>
+                <p style="color:var(--text-dim); margin-top: 10px;">Desenvolvimento de visão estratégica e resiliência através do lema "Servir".</p>
+                <div class="tag-container">
+                    <span class="tag">Soft Skills</span> <span class="tag">Team Lead</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Projetos -->
     <section id="projetos">
-        <h2 data-aos="fade-up">Destaques</h2>
+        <h2 class="section-title" data-aos="fade-right"><span>02.</span> Projetos Dev</h2>
         <div class="grid">
-            <div class="card" data-aos="fade-up">
+            <div class="card" data-aos="fade-up" data-tilt>
                 <img src="https://lh3.googleusercontent.com/u/0/d/1WQJ47vLVdUrNP12K7gEUEKmkc6yZVU1l" class="img-projeto">
-                <h3>Direct Drive Steering</h3>
-                <p style="font-size: 0.9rem; color: var(--text-slate); margin-bottom: 15px;">Simulador de direção construído do zero com Arduino e motores Brushless.</p>
-                <div><span class="tag">C++</span><span class="tag">Hardware</span></div>
+                <h3>Direct Drive DIY</h3>
+                <p style="color:var(--text-dim);">Volante de alto torque para simulação usando Arduino e motores de hoverboard.</p>
+                <div class="tag-container">
+                    <span class="tag">Hardware</span> <span class="tag">C++</span> <span class="tag">Embedded</span>
+                </div>
             </div>
-            <!-- Adicionar mais cards aqui -->
+
+            <div class="card" data-aos="fade-up" data-aos-delay="100" data-tilt>
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800" class="img-projeto">
+                <h3>Sistemas Embarcados</h3>
+                <p style="color:var(--text-dim);">Arquiteturas RTOS para processamento em tempo real e automação industrial.</p>
+                <div class="tag-container">
+                    <span class="tag">Linux</span> <span class="tag">RTOS</span> <span class="tag">Python</span>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Edição -->
+    <section id="video">
+        <h2 class="section-title" data-aos="fade-right"><span>03.</span> Visual Arts</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/SEU_ID_DO_VIDEO" allowfullscreen></iframe>
+                </div>
+                <h3 style="margin-top:20px">Peru Solo Trip</h3>
+                <p style="color:var(--text-dim);">Documentário de viagem focado em narrativa e color grading.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <div class="video-wrapper vertical">
+                    <iframe src="https://www.tiktok.com/embed/7596729582523403521" allowfullscreen></iframe>
+                </div>
+                <h3 style="margin-top:20px; text-align: center;">Short Form</h3>
+                <p style="color:var(--text-dim); text-align: center;">Edição dinâmica para Reels e TikTok.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+                <h3>Stack de Edição</h3>
+                <ul style="list-style:none; color:var(--text-dim)">
+                    <li><i class="fas fa-check color-primary"></i> Premiere Pro</li>
+                    <li><i class="fas fa-check color-primary"></i> DaVinci Resolve</li>
+                    <li><i class="fas fa-check color-primary"></i> After Effects</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voluntariado -->
+    <section id="voluntariado">
+        <h2 class="section-title" data-aos="fade-right"><span>04.</span> Internacional</h2>
+        <div class="grid">
+            <div class="card" data-aos="zoom-in" data-tilt>
+                <img src="https://lh3.googleusercontent.com/u/0/d/1e6y2n-RRBjdGBJuIKoRmUWTtWrhmb8HN" class="img-projeto">
+                <h3>JamCam Colômbia</h3>
+                <p style="color:var(--text-dim);">Voluntário na International Service Team (IST) em Cali.</p>
+            </div>
+
+            <div class="card" data-aos="zoom-in" data-aos-delay="100" data-tilt>
+                <img src="https://lh3.googleusercontent.com/u/0/d/1Oqg-F9ImTyd6TYqPU6tYjTy01eMShL9F" class="img-projeto">
+                <h3>Impacto Social</h3>
+                <p style="color:var(--text-dim);">Gestão de atividades educativas para +1800 jovens da América Latina.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div style="margin-bottom: 20px;">
+            <a href="#" style="color:white; margin: 0 15px; font-size: 1.2rem;"><i class="fab fa-github"></i></a>
+            <a href="#" style="color:white; margin: 0 15px; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color:white; margin: 0 15px; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>&copy; 2024 Arthur Pereira. Designed for Performance.</p>
+    </footer>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <script>
-        AOS.init({ duration: 1000, once: false });
+        // Iniciar Animações de Scroll
+        AOS.init({ 
+            duration: 1000, 
+            once: false,
+            mirror: true 
+        });
 
-        // Typed.js
+        // Efeito de Digitação
         new Typed('#typing-effect', {
-            strings: ['Construindo o futuro do hardware.', 'Editando histórias memoráveis.', 'Liderança no Escotismo.', 'Engenheiro de Computação.'],
-            typeSpeed: 40,
-            backSpeed: 20,
+            strings: ['Engenheiro de Computação', 'Editor de Vídeo Senior', 'Escoteiro Pioneiro', 'Full Stack Developer'],
+            typeSpeed: 50,
+            backSpeed: 30,
             loop: true
         });
 
-        // Mouse Glow Effect
-        const glow = document.getElementById('mouse-glow');
-        document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.clientX + 'px';
-            glow.style.top = e.clientY + 'px';
+        // Efeito Spotlight do Mouse (Fundo)
+        const spotlight = document.getElementById('spotlight');
+        window.addEventListener('mousemove', e => {
+            spotlight.style.setProperty('--x', `${e.clientX}px`);
+            spotlight.style.setProperty('--y', `${e.clientY}px`);
+        });
 
-            // Efeito de iluminação nos cards (Efeito do vídeo)
-            document.querySelectorAll('.card').forEach(card => {
+        // Efeito de Brilho nos Cards (Efeito do vídeo)
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-                
-                // Efeito 3D Tilt suave
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20;
-                const rotateY = (centerX - x) / 20;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                card.style.setProperty('--mx', `${x}px`);
+                card.style.setProperty('--my', `${y}px`);
             });
         });
 
-        // Resetar tilt ao sair do card
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
-            });
+        // Tilt 3D nos cards
+        VanillaTilt.init(document.querySelectorAll(".card"), {
+            max: 10,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.1,
         });
-
-        // Gerador de ícones flutuantes
-        const container = document.getElementById('icon-bg');
-        const icons = ['fa-code', 'fa-microchip', 'fa-video', 'fa-bolt', 'fa-terminal'];
-        
-        for(let i=0; i<15; i++) {
-            const icon = document.createElement('i');
-            icon.className = `fas ${icons[Math.floor(Math.random()*icons.length)]} icon-float`;
-            icon.style.left = Math.random() * 100 + 'vw';
-            icon.style.top = Math.random() * 100 + 'vh';
-            icon.style.animation = `float ${10 + Math.random()*20}s infinite linear`;
-            container.appendChild(icon);
-        }
     </script>
-
-    <style>
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            50% { opacity: 0.15; }
-            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-        }
-    </style>
 </body>
 </html>
