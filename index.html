@@ -11,6 +11,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
 
     <style>
+
+        /* Estilo para links dentro de textos */
+    .inline-link {
+    color: var(--primary); /* Usa o azul brilhante que você já definiu */
+    text-decoration: none; /* Remove o sublinhado padrão */
+    font-weight: 600;
+    position: relative;
+    transition: 0.3s;
+    }
+
+    /* Efeito de linha que aparece ao passar o mouse */
+    .inline-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s;
+    }
+
+    .inline-link:hover {
+    color: #fff; /* A palavra fica branca ao passar o mouse */
+    }
+
+    .inline-link:hover::after {
+    width: 100%; /* A linha cresce debaixo da palavra */
+}
         :root {
             --primary: #38bdf8;
             --primary-glow: rgba(56, 189, 248, 0.35);
@@ -294,6 +323,7 @@
         <a href="#projetos">Projects</a>
         <a href="#video">Visuals</a>
         <a href="#voluntariado">Scout</a>
+        <a href="#curriculum">Curriculum</a>
     </nav>
 </header>
 
@@ -331,9 +361,25 @@
         </div>
     </section>
 
+      <!-- Currúculo -->
+    <section id="curriculum">
+        <h2 class="section-title" data-aos="fade-right"><span>02.</span> Currículo</h2>
+        <div class="grid">
+            <div class="card" data-aos="fade-up">
+                <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+                <h3>English - Advanced/C1</h3>
+                <p style="color:var(--primary); font-size: 0.9rem; font-weight: 600;">Wizard</p>
+                <p style="color:var(--text-dim); margin-top: 10px;">
+                    <a href="https://lh3.googleusercontent.com/u/0/d/1v9Oz1JRekIxq7rUqoMoK0wS4QwdTvGZG" target="_blank" class="inline-link">Certificate</a></p>
+                <div class="tag-container">
+                    <span class="tag">English</span> 
+                </div>
+            </div>
+    </section>
+
     <!-- Projetos -->
     <section id="projetos">
-        <h2 class="section-title" data-aos="fade-right"><span>02.</span> Projetos Dev</h2>
+        <h2 class="section-title" data-aos="fade-right"><span>03.</span> Projetos Dev</h2>
         <div class="grid">
             <div class="card" data-aos="fade-up">
                 <img src="https://lh3.googleusercontent.com/u/0/d/1WQJ47vLVdUrNP12K7gEUEKmkc6yZVU1l" class="img-projeto">
@@ -357,7 +403,7 @@
 
     <!-- Edição -->
     <section id="video">
-        <h2 class="section-title" data-aos="fade-right"><span>03.</span> Visual Arts</h2>
+        <h2 class="section-title" data-aos="fade-right"><span>04.</span> Visual Arts</h2>
         <div class="grid">
             <div class="card" data-aos="fade-up">
                 <div class="video-wrapper">
@@ -418,7 +464,7 @@
 
     <!-- Voluntariado -->
     <section id="voluntariado">
-        <h2 class="section-title" data-aos="fade-right"><span>04.</span> Internacional</h2>
+        <h2 class="section-title" data-aos="fade-right"><span>05.</span> Internacional</h2>
         <div class="grid">
             <div class="card" data-aos="zoom-in">
                 <img src="https://lh3.googleusercontent.com/u/0/d/1e6y2n-RRBjdGBJuIKoRmUWTtWrhmb8HN" class="img-projeto">
