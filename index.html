@@ -111,6 +111,8 @@
         transform: translateX(-50%);
         z-index: 1000;
         width: auto;
+        justify-content: center;
+        transition: width 0.3s ease; /* Suaviza a mudança de tamanho */
         }
 
         header nav {
@@ -122,6 +124,7 @@
         display: flex;
         gap: 25px;
         align-items: center;
+        transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
         }
 
         header nav a {
@@ -293,15 +296,80 @@
         iframe { width: 100%; height: 100%; border: none; }
 
         /* --- MENU MOBILE --- */
-        .mobile-btn { display: none; color: white; font-size: 1.5rem; }
+        /* Estilo das 3 linhas (Hambúrguer) */
+        .mobile-btn {
+        display: none; /* Fica escondido no computador */
+        width: 30px;
+        height: 22px;
+        position: relative;
+        cursor: pointer;
+        z-index: 1100; /* Fica acima de tudo */
+        }
+
+        .mobile-btn span {
+        display: block;
+        position: absolute;
+        height: 2px;
+        width: 100%;
+        background: var(--primary); /* Cor azul que você já usa */
+        border-radius: 2px;
+        transition: .25s ease-in-out; /* Velocidade da animação */
+        }
+
+        /* Posição de cada linha */
+        .mobile-btn span:nth-child(1) { top: 0px; }
+        .mobile-btn span:nth-child(2) { top: 10px; }
+        .mobile-btn span:nth-child(3) { top: 20px; }
+
+        /* Quando o menu abrir, transforma as linhas em X */
+        .mobile-btn.open span:nth-child(1) {
+        top: 10px;
+        transform: rotate(135deg);
+        }
+        .mobile-btn.open span:nth-child(2) {
+        opacity: 0;
+        left: -40px; /* Faz a linha do meio "voar" para o lado */
+        }
+        .mobile-btn.open span:nth-child(3) {
+        top: 10px;
+        transform: rotate(-135deg);
+        }
 
         @media (max-width: 768px) {
-            header { padding: 1rem 5%; }
-            nav { display: none; }
-            .mobile-btn { display: block; }
-            .hero h1 { font-size: 3.5rem; }
-            section { padding: 80px 5%; }
-        }
+    header {
+        width: 90%; /* Ocupa quase toda a largura no mobile */
+        justify-content: flex-end; /* Coloca o botão na direita */
+    }
+
+    .mobile-btn {
+        display: block; /* Mostra o botão apenas no celular */
+    }
+
+    header nav {
+        /* Transforma o menu em uma tela cheia escondida no topo */
+        position: fixed;
+        top: -110vh; /* Escondido acima da tela */
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(3, 7, 18, 0.98); /* Fundo quase preto */
+        flex-direction: column;
+        justify-content: center;
+        border-radius: 0;
+        border: none;
+        gap: 30px;
+        transition: 0.5s ease-in-out;
+    }
+
+    /* Quando o menu tiver a classe .open, ele desce */
+    header nav.open {
+        top: -24px; /* Ajuste para compensar o top do header */
+    }
+
+    header nav a {
+        font-size: 1.8rem; /* Letras maiores para facilitar o toque */
+    }
+}
 
         footer {
             padding: 50px; text-align: center;
@@ -317,13 +385,20 @@
     <div id="custom-cursor"></div> <!-- Aproveitando para criar o cursor novo aqui -->
 
 <header>
-    <nav>
+    <!-- Botão Hambúrguer -->
+    <div class="mobile-btn" id="mobile-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav id="nav-menu">
         <a href="#home">Arthur.P</a>
         <a href="#experiencias">Career</a>
+        <a href="#curriculum">Curriculum</a>
         <a href="#projetos">Projects</a>
         <a href="#video">Visuals</a>
         <a href="#voluntariado">Scout</a>
-        <a href="#curriculum">Curriculum</a>
     </nav>
 </header>
 
@@ -557,6 +632,34 @@
             gsap.to(cursor, { scale: 1, duration: 0.3 });
         });
     });
+
+    // Lógica do Menu Mobile
+const mobileBtn = document.getElementById('mobile-btn');
+const navMenu = document.getElementById('nav-menu');
+const navLinks = document.querySelectorAll('header nav a');
+
+function toggleMenu() {
+    mobileBtn.classList.toggle('open');
+    navMenu.classList.toggle('open');
+    
+    // Bloqueia o scroll do corpo quando o menu está aberto
+    if (navMenu.classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}
+
+mobileBtn.addEventListener('click', toggleMenu);
+
+// Fecha o menu ao clicar em qualquer link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        mobileBtn.classList.remove('open');
+        navMenu.classList.remove('open');
+        document.body.style.overflow = 'auto';
+    });
+});
 </script>
 </body>
 </html>
